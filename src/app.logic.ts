@@ -1,10 +1,8 @@
 import fs from 'fs'
-// const message: string = 'Hola Mundo!'
-
-// console.log(message)
+import { yarg } from './config/plugins/args.plugin'
 
 const marco = '='.repeat(30)
-const base = 5
+const { b: base, l: limit, s: showTable } = yarg
 const headerMessage = `
 ${marco}
 ${' '.repeat(8)}Tabla del ${base}
@@ -12,13 +10,15 @@ ${marco}\n
 `
 
 let outputMessage = ''
-const veces = 10
-for (let i = 1; i <= veces; i++) {
+for (let i = 1; i <= limit; i++) {
   outputMessage += `${' '.repeat(8) + base} x ${i} = ${base * i}\n`
 }
 
 outputMessage = headerMessage + outputMessage
-console.log(outputMessage)
+
+if (showTable) {
+  console.log(outputMessage)
+}
 
 const outputPath = `outputs`
 
